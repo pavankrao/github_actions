@@ -1,28 +1,30 @@
-name: Rebase Feature Branch
+name: Rebase feature branch with main
 
 on:
   push:
     branches:
       - main
-#  schedule:
-#    - cron: "0 15 * * *"
+
+permissions: write-all
 
 jobs:
-  rebase:
+  rebase-latest-main:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Fetch latest changes in main branch
-        run: git fetch origin main
+      - name: Setup Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Checkout feature branch
-        run: git checkout feature
-
-      - name: Rebase feature onto main
-        run: git rebase origin/main
-
-      - name: Push changes
-        run: git push origin feature --force-with-lease
+      - name: Update feature branch
+        run: |
+          git fetch origin
+          git checkout feature
+          git pull origin feature
+          git rebase origin/main
+          git push origin feature --force-with-lease
