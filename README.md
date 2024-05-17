@@ -3,5 +3,5 @@ Experimental Github actions
 
 ## Examples in repo 
 
-1. [Explore github actions](https://github.com/pavankrao/github_actions/blob/main/.github/workflows/github-actions-demo.yml)
-2. [Rebase `feature` branch with latest main on every push](https://github.com/pavankrao/github_actions/blob/main/.github/workflows/rebase-feature.yml)
+1. [Explore GitHub actions](https://github.com/pavankrao/github_actions/blob/main/.github/workflows/github-actions-demo.yml)
+2. [Rebase `feature` branch whenever `main` branch is updated](https://github.com/pavankrao/github_actions/blob/main/.github/workflows/rebase-feature.yml)
