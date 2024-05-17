@@ -7,6 +7,9 @@ on:
 
 permissions: write-all
 
+env:
+  BRANCH_TO_REBASE: feature
+
 jobs:
   rebase-latest-main:
     runs-on: ubuntu-latest
@@ -21,10 +24,10 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Update feature branch
+      - name: Rebase branch
         run: |
           git fetch origin
-          git checkout feature
-          git pull origin feature
+          git checkout ${{ env.BRANCH_TO_REBASE }}
+          git pull origin ${{ env.BRANCH_TO_REBASE }}
           git rebase origin/main
-          git push origin feature --force-with-lease
+          git push origin ${{ env.BRANCH_TO_REBASE }} --force-with-lease
